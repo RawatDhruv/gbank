@@ -10,23 +10,30 @@ class TransactionController {
         [transactionList: response.list, total: response.count]
     }
 
-    def transaction(Long id) {
+    def transfer(Long id) {
+        println("ID is ")
+        print(id)
         def response = accountService.getById(id)
-        println(params.type)
         if (!response) {
-            redirect(controller: "account", action: "index")
+           redirect(controller: "account", action: "index")
         } else {
-            [transactionInstance: response , type : params.type]
+            [accountInstance: response]
         }
     }
 
-    def transfer(){
+    def transferUtility(){
+        println("params are")
+        print(params)
         def response = transactionService.transfer(params)
         if (!response.isSuccess) {
+            println("failure redirect")
             flash.redirectParams = response.model
             flash.message = AppUtil.infoMessage(g.message(code: "unable.to.transfer"), false)
-            redirect(controller: "account", action: "create")
+            println(" in TU")
+            println(params.id)
+            redirect(controller: "transaction", action: "transfer" , id:params.fromAccount )
         }else{
+            println("success redirect")
             flash.message = AppUtil.infoMessage(g.message(code: "Transfer Succesful"))
             redirect(controller: "account", action: "index")
         }

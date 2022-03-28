@@ -31,25 +31,10 @@
                 </div>
         </g:form>
         </g:if>
-        <g:if test="${type == 'transfer'}">
-        <g:form controller="transaction" action="${type}">
-                    <div class="form-group">
-                        <label><g:message code="toAccount"/> *</label>
-                        <g:textField name="toAccount" class="form-control" value="${transaction?.toAccount}" placeholder="Please Enter Reciever's Account ID"/>
-                        <UIHelper:renderErrorMessage fieldName="toAccount" model="${transaction}" errorMessage="please.enter.recieverID"/>
-                    </div>
 
-                    <div class="form-group">
-                        <label><g:message code="amount"/> *</label>
-                        <g:field type="number" name="amount" class="form-control" value="${transfer?.amount}" placeholder="Please Enter Amount"/>
-                        <UIHelper:renderErrorMessage fieldName="Amount" />
-                    </div>
-                    <g:hiddenField type="number" name="fromAccount" value="${accountInstance.id}" />
-                        <div class="form-action-panel">
-                            <g:submitButton class="btn btn-primary"  name="${type}" value="${g.message(code: "${type}")}"/>
-                        </div>
-        </g:form>
-                </g:if>
+        <g:if test="${flash.message}">
+           <div class="update_message" role="status">${flash.message}</div>
+        </g:if>
         <div class="form-action-panel">
             <g:link controller="account" action="index" class="btn btn-primary"><g:message code="cancel"/></g:link>
         </div>

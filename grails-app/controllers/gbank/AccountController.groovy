@@ -9,6 +9,7 @@ class AccountController {
 
 
     def index() {
+        //println(params)
         def response = accountService.list(params)
         [accountList: response.list, total: response.count]
     }
@@ -40,7 +41,7 @@ class AccountController {
 
     def transaction(Long id) {
         def response = accountService.getById(id)
-        println(params.type)
+//        println(params.type)
         if (!response) {
             redirect(controller: "account", action: "index")
         } else {
@@ -54,7 +55,7 @@ class AccountController {
         if (!response.isSuccess) {
             flash.redirectParams = response.model
             flash.message = AppUtil.infoMessage(g.message(code: "unable.to.withdraw"), false)
-            redirect(controller: "account", action: "create")
+            redirect(controller: "account", action: "transaction" , id:params.id , params:[type:"withdraw"])
         }else{
             flash.message = AppUtil.infoMessage(g.message(code: "Withdraw Succesful"))
             redirect(controller: "account", action: "index")
@@ -66,7 +67,7 @@ class AccountController {
         if (!response.isSuccess) {
             flash.redirectParams = response.model
             flash.message = AppUtil.infoMessage(g.message(code: "unable.to.deposit"), false)
-            redirect(controller: "account", action: "create")
+            redirect(controller: "account", action: "transaction" , id:params.id , params:[type:"deposit"])
         }else{
             flash.message = AppUtil.infoMessage(g.message(code: "Deposit Succesful"))
             redirect(controller: "account", action: "index")

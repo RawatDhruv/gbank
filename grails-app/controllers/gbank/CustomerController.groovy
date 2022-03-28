@@ -23,6 +23,7 @@ class CustomerController {
     }
 
     def save() {
+        print(params)
         def response = customerService.save(params)
         if (!response.isSuccess) {
             flash.redirectParams = response.model

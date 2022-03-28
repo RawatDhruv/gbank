@@ -53,7 +53,7 @@
                                         <g:link controller="account" action="details" class="btn btn-secondary" id="${info.id}"><p>Details</p></g:link>
                                         <g:link controller="account" action="transaction" class="btn btn-secondary" id="${info.id}" params = "[type:'withdraw']" type='withdraw'><p>Withdraw</p></g:link>
                                         <g:link controller="account" action="transaction" class="btn btn-secondary" id="${info.id}" params = "[type:'deposit']" type="deposit"><p>Deposit</p></g:link>
-                                        <g:link controller="account" action="transaction" class="btn btn-secondary" id="${info.id}" params = "[type:'transfer']" type="transfer"><p>Transfer</p></g:link>
+                                        <g:link controller="transaction" action="transfer" class="btn btn-secondary" id="${info.id}"  type="transfer"><p>Transfer</p></g:link>
 
                                     </div>
                               </td>
